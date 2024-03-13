@@ -9,4 +9,8 @@ define(function (require) {
     var print = require('print');
 
     print(messages.getHello());
+    return {
+        require_print:print,
+        msg:'success'
+    }
 });

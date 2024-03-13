@@ -5,5 +5,28 @@
     </head>
     <body>
         <h1>Hello World</h1>
+        <script src="app.js"></script>
+        <script>
+            console.log('同步代码执行')
+            // 定时器、文件加载、dom事件本质都是相似的，都是注册回调函数，等到注册的事件的发生后，将对应的回调推到异步队列里面。
+            /**
+             * 例如下面这个定时器代码就是等到100ms以后把callback1这个回调函数推到异步队列里面，
+             * 30ms以后把callback2这个回调函数推到异步队列里面，所以100ms以后异步队列里面有[callback2, callback1]，
+             * 至于requireCb什么时候加入的与加载速度有关，比如网速和require.js文件的大小有关系，可以在浏览器里面调整网速来验证，
+             * 所有最终异步队列的三个回调函数的顺序不一定，但callback2肯定在callback1前面，三者的关系可能如下：
+             * 1、[requireCb, callback2, callback1]
+             * 2、[callback2, callback1, requireCb]
+             * 3、[callback2, requireCb, callback1]
+             * */ 
+            var callback1 = ()=>{
+                console.log('callback1')
+            }
+            var callback2 = ()=>{
+                console.log('callback2')
+            }
+            setTimeout(callback1, 10000)
+            setTimeout(callback2, 3000)
+            
+        </script>
     </body>
 </html>
